@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CharacterController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [Header("이동 설정")]
     public float moveSpeed = 5f;
