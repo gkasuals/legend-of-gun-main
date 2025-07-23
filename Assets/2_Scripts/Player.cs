@@ -6,8 +6,10 @@ public class Player : MonoBehaviour
 {
     [Header("이동 설정")]
     public float moveSpeed = 5f;
-    private Vector2 moveInput;
-    private Rigidbody2D rb;
+    private Vector2 Input;
+     
+    Rigidbody2D rb;
+    SpriteRenderer spriter;
 
     [Header("공격 설정")]
     public GameObject bulletPrefab;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>(); 
     }
 
     void Update()
@@ -25,16 +28,30 @@ public class Player : MonoBehaviour
         HandleMovement();
 
         // 움직임이 없을 때 공격 시도
-        if (moveInput.magnitude == 0)
+        if (Input.magnitude == 0)
         {
             TryAttackNearestEnemy();
         }
     }
 
+    private void LateUpdate()
+    {
+
+        if (Input.x > 0)
+        {
+            spriter.flipX = false; // 오른쪽으로 이동
+        }
+        else if (Input.x < 0)
+        {
+            spriter.flipX = true; // 왼쪽으로 이동
+        }
+
+    }
+
     void HandleMovement()
     {
-        moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        rb.linearVelocity = moveInput * moveSpeed;
+        Input = new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical")).normalized;
+        rb.linearVelocity = Input * moveSpeed;
     }
 
     void TryAttackNearestEnemy()
@@ -59,4 +76,5 @@ public class Player : MonoBehaviour
             .OrderBy(enemy => Vector2.Distance(transform.position, enemy.transform.position))
             .FirstOrDefault();
     }
+
 }
