@@ -5,11 +5,12 @@ using System.Linq;
 public class Player : MonoBehaviour
 {
     [Header("이동 설정")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
     private Vector2 Input;
      
     Rigidbody2D rb;
     SpriteRenderer spriter;
+    Animator ani;
 
     [Header("공격 설정")]
     public GameObject bulletPrefab;
@@ -20,7 +21,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriter = GetComponent<SpriteRenderer>(); 
+        spriter = GetComponent<SpriteRenderer>();
+        ani = GetComponent<Animator>();
     }
 
     void Update()
@@ -45,6 +47,8 @@ public class Player : MonoBehaviour
         {
             spriter.flipX = true; // 왼쪽으로 이동
         }
+
+        ani.SetFloat("Speed", Input.magnitude);
 
     }
 
@@ -71,7 +75,7 @@ public class Player : MonoBehaviour
 
     GameObject FindNearestEnemy()
     {
-        return GameObject.FindGameObjectsWithTag("Enemy")
+        return GameObject.FindGameObjectsWithTag("Mob")
             .Where(enemy => Vector2.Distance(transform.position, enemy.transform.position) < attackRange)
             .OrderBy(enemy => Vector2.Distance(transform.position, enemy.transform.position))
             .FirstOrDefault();
