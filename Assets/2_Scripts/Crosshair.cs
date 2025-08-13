@@ -6,7 +6,7 @@ public class Crosshair : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Camera mainCam;
 
-    void Awake()
+    private void Awake()
     {
         mainCam = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -15,11 +15,12 @@ public class Crosshair : MonoBehaviour
         spriteRenderer.sprite = CrosshairSprite;
     }
 
-    void Update()
+    private void Update()
     {
-        // 마우스 위치 → 월드 좌표
-        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f;
-        transform.position = mousePos;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 10f;
+        Vector3 worldPos = mainCam.ScreenToWorldPoint(mousePos);
+
+        transform.position = new Vector3(worldPos.x, worldPos.y, 0f);
     }
 }
