@@ -25,18 +25,15 @@ public class Hand : MonoBehaviour
 
     private void HandleInput()
     {
-        if (!isLeft) // 오른손만 처리
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                spriter.flipX = true; // 오른손 플립
-                spriter.sortingOrder = 4; 
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                spriter.flipX = false; // 오른손 플립 해제
-                spriter.sortingOrder = 6;
-            }
-        }
+      if (Input.GetKeyDown(KeyCode.A))
+      {
+        spriter.flipX = true; // 오른손 플립
+        spriter.sortingOrder = 2; 
+      }
+      else if (Input.GetKeyDown(KeyCode.D))
+      {
+        spriter.flipX = false; // 오른손 플립 해제
+        spriter.sortingOrder = 2;
+      }
     }
 }

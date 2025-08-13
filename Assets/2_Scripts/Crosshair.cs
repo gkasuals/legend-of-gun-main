@@ -17,10 +17,8 @@ public class Crosshair : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;
-        Vector3 worldPos = mainCam.ScreenToWorldPoint(mousePos);
-
-        transform.position = new Vector3(worldPos.x, worldPos.y, 0f);
+        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
+        transform.position = mousePos;
     }
 }

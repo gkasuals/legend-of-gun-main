@@ -1,30 +1,30 @@
-using UnityEngine;
+癤퓎sing UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenuPanel;
-    [SerializeField] private GameObject characterSelectPanel;
+    public static UIManager Instance { get; private set; }
 
-    private void Start()
+    public Text ammoText;
+
+    void Awake()
     {
-        mainMenuPanel.SetActive(true);
-        characterSelectPanel.SetActive(false);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // 시작 버튼에 연결
-    public void OnStartButton()
+    public void UpdateAmmoText(int current, int max)
     {
-        mainMenuPanel.SetActive(false);
-        characterSelectPanel.SetActive(true);
-    }
-
-    // 캐릭터 선택 버튼에 연결 (예: 남캐면 "0", 여캐면 "1")
-    public void OnCharacterSelect(int characterId)
-    {
-        // 선택한 캐릭터 정보를 GameManager 등에 저장
-
-        // 게임 씬으로 이동 (예: "GameScene" 이름의 씬)
-        SceneManager.LoadScene("GameScene");
+        if (current < 0)
+            ammoText.text = "징횆 / " + max.ToString();
+        else
+            ammoText.text = current + " / " + max;
     }
 }
