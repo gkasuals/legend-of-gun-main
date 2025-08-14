@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [Header("총 관련")]
+    [Header("에임")]
     public Transform Crosshair; // 총구 위치
 
-    [Header("탄창 관련")]
+    [Header("탄창")]
     public int maxAmmo = 30;          // 최대 탄환 수
     public float reloadTime = 2f;    // 재장전 시간
     private int currentAmmo;
     private bool isReloading = false;
+
+    [Header("연사 속도")]
+    public float fireRate = 0.3f; // 0.5초에 한 발
+    private float nextFireTime = 0f;
 
     private Camera mainCam;
 
@@ -34,12 +38,13 @@ public class Gun : MonoBehaviour
             return;
         }
 
-        // 좌클릭 발사 - 탄약이 있을 때만
-        if (Input.GetMouseButtonDown(0))
+        // 좌클릭 연사
+        if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             if (currentAmmo > 0)
             {
                 Fire();
+                nextFireTime = Time.time + fireRate;
             }
             else
             {

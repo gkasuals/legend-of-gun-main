@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    public Text ammoText;
+    public TextMeshProUGUI AmmoText;
 
     void Awake()
     {
@@ -23,8 +24,8 @@ public class UIManager : MonoBehaviour
     public void UpdateAmmoText(int current, int max)
     {
         if (current < 0)
-            ammoText.text = "¡Ä / " + max.ToString();
+            AmmoText.text = "¡Ä / " + max.ToString();
         else
-            ammoText.text = current + " / " + max;
+            AmmoText.text = current + " / " + max;
     }
 }
