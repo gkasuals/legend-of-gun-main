@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     private bool isReloading = false;
 
     [Header("연사 속도")]
-    public float fireRate = 0.3f; // 0.5초에 한 발
+    public float fireRate = 0.2f; // 0.5초에 한 발
     private float nextFireTime = 0f;
 
     private Camera mainCam;
