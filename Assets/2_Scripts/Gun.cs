@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [Header("¿¡ÀÓ")]
-    public Transform Crosshair; // ÃÑ±¸ À§Ä¡
+    [Header("í¬ë¡œìŠ¤í—¤ì–´")]
+    public Transform Crosshair;
 
-    [Header("ÅºÃ¢")]
-    public int maxAmmo = 30;          // ÃÖ´ë ÅºÈ¯ ¼ö
-    public float reloadTime = 2f;    // ÀçÀåÀü ½Ã°£
+    [Header("íƒ„ì°½")]
+    public int maxAmmo = 30;
+    public float reloadTime = 2f;
     private int currentAmmo;
     private bool isReloading = false;
 
-    [Header("¿¬»ç ¼Óµµ")]
-    public float fireRate = 0.2f; // 0.5ÃÊ¿¡ ÇÑ ¹ß
+    [Header("ë°œì‚¬ ì†ë„")]
+    public float fireRate = 0.2f;
     private float nextFireTime = 0f;
 
     private Camera mainCam;
+    [SerializeField] private GameObject bulletPrefab;
 
     private void Start()
     {
@@ -31,14 +32,12 @@ public class Gun : MonoBehaviour
         if (isReloading)
             return;
 
-        // R Å°·Î ÀçÀåÀü
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
             return;
         }
 
-        // ÁÂÅ¬¸¯ ¿¬»ç
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             if (currentAmmo > 0)
@@ -48,7 +47,8 @@ public class Gun : MonoBehaviour
             }
             else
             {
-                Debug.Log("ÅºÈ¯ ¾øÀ½! ÀçÀåÀü ÇÊ¿ä (R Å°)");
+                Debug.Log("íƒ„ì•½ ë¶€ì¡±! ì¬ì¥ì „ í•„ìš” (R í‚¤)");
+                StartCoroutine(Reload());
             }
         }
     }
@@ -56,12 +56,12 @@ public class Gun : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        Debug.Log("ÀçÀåÀü Áß...");
+        Debug.Log("ì¬ì¥ì „ ì¤‘...");
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         UIManager.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
         isReloading = false;
-        Debug.Log("ÀçÀåÀü ¿Ï·á!");
+        Debug.Log("ì¬ì¥ì „ ì™„ë£Œ!");
     }
 
     private void Fire()
@@ -69,32 +69,14 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         UIManager.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
 
+        // ë§ˆìš°ìŠ¤ ìœ„ì¹˜ â†’ ì›”ë“œ ì¢Œí‘œ ë³€í™˜
         Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mouseWorldPos - Crosshair.position).normalized;
 
-        // ·¹ÀÌÄ³½ºÆ® (Ã¹ ¹øÂ° Ãæµ¹Ã¼¸¸ È®ÀÎ)
-        RaycastHit2D hit = Physics2D.Raycast(Crosshair.position, direction, 100f);
-        if (hit.collider != null && hit.collider.gameObject != gameObject)
-        {
-            Debug.Log("Hit: " + hit.collider.name);
-        }
+        // ì´êµ¬ ìœ„ì¹˜ì—ì„œ ì´ì•Œ ìƒì„±
+        GameObject bulletObj = Instantiate(bulletPrefab, Crosshair.position, Quaternion.identity);
 
-        // ÃÑ¾Ë ±ËÀû Ç¥½Ã
-        GameObject trailObj = new GameObject("BulletTrail");
-        LineRenderer lr = trailObj.AddComponent<LineRenderer>();
-
-        lr.positionCount = 2;
-        lr.SetPosition(0, Crosshair.position);
-        lr.SetPosition(1, Crosshair.position + (Vector3)(direction * 100f));
-
-        lr.startWidth = 0.05f;
-        lr.endWidth = 0.05f;
-
-        lr.material = new Material(Shader.Find("Sprites/Default"));
-        lr.startColor = Color.gray;
-        lr.endColor = Color.gray;
-        lr.sortingOrder = 10;
-
-        Destroy(trailObj, 0.05f);
+        // Bullet ìŠ¤í¬ë¦½íŠ¸ì— ë°©í–¥ ì „ë‹¬
+        bulletObj.GetComponent<Bullet>().Setup(direction);
     }
 }
