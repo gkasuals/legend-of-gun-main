@@ -48,4 +48,5 @@ public class player : MonoBehaviour
         Input = new Vector2(UnityEngine.Input.GetAxisRaw("Horizontal"), UnityEngine.Input.GetAxisRaw("Vertical")).normalized;
         rb.linearVelocity = Input * moveSpeed;
     }
+   
 }

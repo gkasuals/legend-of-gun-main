@@ -3016,7 +3016,7 @@ GameObject:
   - component: {fileID: 958484880}
   - component: {fileID: 958484881}
   m_Layer: 0
-  m_Name: Right Hand
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

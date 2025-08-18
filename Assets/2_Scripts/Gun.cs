@@ -69,22 +69,18 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         UIManager.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
 
-        // A지점: 플레이어 오브젝트 위치
         Vector3 playerPos = transform.position;
-
-        // B지점: 크로스헤어 위치
         Vector3 crosshairPos = Crosshair.position;
-
-        // 방향 계산
         Vector2 direction = (crosshairPos - playerPos).normalized;
 
-        // 플레이어 위치에서 총알 생성
-        GameObject bulletObj = Instantiate(bulletPrefab, playerPos, Quaternion.identity);
+        // 기본 각도 계산
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Bullet 스크립트에 방향 전달
+        // 만약 프리팹이 Y축을 기준으로 되어 있다면, +90도 보정
+        Quaternion bulletRotation = Quaternion.AngleAxis(angle + 90f, Vector3.forward);
+
+        GameObject bulletObj = Instantiate(bulletPrefab, playerPos, bulletRotation);
         bulletObj.GetComponent<Bullet>().Setup(direction);
-
-        // 1초 뒤에 총알 삭제
         Destroy(bulletObj, 1f);
     }
 }
