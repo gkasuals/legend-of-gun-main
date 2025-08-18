@@ -1595,7 +1595,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.7
+  m_Mass: 0.3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -1644,8 +1644,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0016280413, y: 0}
-  m_Size: {x: 0.72982764, y: 1}
+  m_Offset: {x: 0.002367258, y: -0.03185451}
+  m_Size: {x: 0.6687112, y: 0.936291}
   m_Direction: 0
 --- !u!95 &529817628
 Animator:
@@ -1712,7 +1712,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2092964637, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1753,7 +1753,6 @@ GameObject:
   - component: {fileID: 546217748}
   - component: {fileID: 546217749}
   - component: {fileID: 546217750}
-  - component: {fileID: 546217751}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1844,7 +1843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cce444cc9decda4fb2a4abc1db141e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
 --- !u!50 &546217747
 Rigidbody2D:
   serializedVersion: 5
@@ -1961,23 +1960,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0067560673, y: -0.023646235}
   m_Size: {x: 0.78380585, y: 1.0638187}
   m_Direction: 0
---- !u!114 &546217751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 546217742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c106b712cf552c449a31afb4f43c6de0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Crosshair: {fileID: 0}
-  maxAmmo: 30
-  reloadTime: 2
-  fireRate: 0.2
-  bulletPrefab: {fileID: 0}
 --- !u!1 &623461169
 GameObject:
   m_ObjectHideFlags: 0
@@ -3137,7 +3119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c106b712cf552c449a31afb4f43c6de0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Crosshair: {fileID: 0}
+  Crosshair: {fileID: 126138893}
   maxAmmo: 30
   reloadTime: 2
   fireRate: 0.2
@@ -6169,7 +6151,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.7
+  m_Mass: 0.3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -6218,8 +6200,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.047849953, y: 0}
-  m_Size: {x: 0.82227147, y: 1}
+  m_Offset: {x: 0.054076195, y: 0.0031691194}
+  m_Size: {x: 0.7800312, y: 1.0063382}
   m_Direction: 0
 --- !u!114 &2043885631
 MonoBehaviour:

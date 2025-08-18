@@ -11,10 +11,8 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = direction * speed;
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Destroy(gameObject);
+        // 1초 뒤에 총알 삭제
+        Destroy(gameObject, 1f);
     }
 }

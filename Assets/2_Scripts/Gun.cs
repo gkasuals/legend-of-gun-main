@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
 
     [Header("발사 속도")]
     public float fireRate = 0.2f;
-    private float nextFireTime = 0f;
+    private float nextFireTime = 0.2f;
 
     private Camera mainCam;
     [SerializeField] private GameObject bulletPrefab;
@@ -69,14 +69,22 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         UIManager.Instance.UpdateAmmoText(currentAmmo, maxAmmo);
 
-        // 마우스 위치 → 월드 좌표 변환
-        Vector3 mouseWorldPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mouseWorldPos - Crosshair.position).normalized;
+        // A지점: 플레이어 오브젝트 위치
+        Vector3 playerPos = transform.position;
 
-        // 총구 위치에서 총알 생성
-        GameObject bulletObj = Instantiate(bulletPrefab, Crosshair.position, Quaternion.identity);
+        // B지점: 크로스헤어 위치
+        Vector3 crosshairPos = Crosshair.position;
+
+        // 방향 계산
+        Vector2 direction = (crosshairPos - playerPos).normalized;
+
+        // 플레이어 위치에서 총알 생성
+        GameObject bulletObj = Instantiate(bulletPrefab, playerPos, Quaternion.identity);
 
         // Bullet 스크립트에 방향 전달
         bulletObj.GetComponent<Bullet>().Setup(direction);
+
+        // 1초 뒤에 총알 삭제
+        Destroy(bulletObj, 1f);
     }
 }
