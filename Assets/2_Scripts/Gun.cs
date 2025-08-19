@@ -76,8 +76,8 @@ public class Gun : MonoBehaviour
         // 기본 각도 계산
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // 만약 프리팹이 Y축을 기준으로 되어 있다면, +90도 보정
-        Quaternion bulletRotation = Quaternion.AngleAxis(angle + 90f, Vector3.forward);
+        // 앞/뒤 반전 보정 (Y축 기준 프리팹일 때)
+        Quaternion bulletRotation = Quaternion.AngleAxis(angle + 270f, Vector3.forward);
 
         GameObject bulletObj = Instantiate(bulletPrefab, playerPos, bulletRotation);
         bulletObj.GetComponent<Bullet>().Setup(direction);
