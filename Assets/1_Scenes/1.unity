@@ -503,8 +503,8 @@ Camera:
   m_GameObject: {fileID: 315458525}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.16862746, g: 0.1254902, b: 0.13333334, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1960,7 +1960,7 @@ MonoBehaviour:
   maxAmmo: 20
   reloadTime: 2
   fireRate: 0.2
-  bulletPrefab: {fileID: 4461732134204967799, guid: b35144dd7987ffe48827de7f0f233ca3, type: 3}
+  bulletPrefab: {fileID: 4461732134204967799, guid: 5b53feffccb928941b56997a10bbb72b, type: 3}
 --- !u!1 &1046483002
 GameObject:
   m_ObjectHideFlags: 0
@@ -3251,7 +3251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7510421533400254663, guid: 76e4a19f203d8d040b5671810e960403, type: 3}
       propertyPath: m_Name
-      value: Room
+      value: Room 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
