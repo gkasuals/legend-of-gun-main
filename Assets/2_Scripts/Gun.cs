@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     public Transform Crosshair;
 
     [Header("탄창")]
-    public int maxAmmo = 30;
+    public int maxAmmo = 20;
     public float reloadTime = 2f;
     private int currentAmmo;
     private bool isReloading = false;
